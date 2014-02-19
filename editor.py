@@ -20,6 +20,7 @@ class MdEditor(Gtk.Window):
         
         self.textview = Gtk.TextView()
         self.textbuffer = self.textview.get_buffer()
+        self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
         scrolled_window.add(self.textview)
         
 editor = MdEditor()
