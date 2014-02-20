@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
 UI_INFO = """
 <ui>
     <menubar name='MenuBar'>
         <menu action='FileMenu'>
+            <menuitem action='FileNew' />
+            <menuitem action='FileOpen' />
+            <menuitem action='FileSave' />
             <menuitem action='FileQuit' />
         </menu>
     </menubar>
@@ -48,9 +51,30 @@ class MdEditor(Gtk.Window):
         action_filemenu = Gtk.Action("FileMenu", "File", None, None)
         action_group.add_action(action_filemenu)
 
+        action_filequit = Gtk.Action("FileNew", "New", None, None)
+        action_filequit.connect("activate", self.on_menu_file_new)
+        action_group.add_action(action_filequit)
+
+        action_filequit = Gtk.Action("FileOpen", "Open", None, None)
+        action_filequit.connect("activate", self.on_menu_file_open)
+        action_group.add_action(action_filequit)
+
+        action_filequit = Gtk.Action("FileSave", "Save", None, None)
+        action_filequit.connect("activate", self.on_menu_file_save)
+        action_group.add_action(action_filequit)
+
         action_filequit = Gtk.Action("FileQuit", "Quit", None, None)
         action_filequit.connect("activate", self.on_menu_file_quit)
         action_group.add_action(action_filequit)
+
+    def on_menu_file_new(self, widget):
+        print("New file")
+
+    def on_menu_file_open(self, widget):
+        print("Open file")
+
+    def on_menu_file_save(self, widget):
+        print("Save file")
 
     def on_menu_file_quit(self, widget):
         Gtk.main_quit()
